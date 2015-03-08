@@ -1,0 +1,33 @@
+<%- model_class = Todo -%>
+<div class="page-header">
+  <h3><%=t '.title', :default => "All things to do" %></h3>
+</div>
+<table class="table table-striped">
+    <% @todos.each do |todo| %>
+      <tr>
+        <td>
+        <% if todo.complete? %>
+          <%= link_to " ", complete_todo_path(todo), :method => :put, :class => 'icon-check icon-green' %>
+        <% else %>
+          <%= link_to " ",
+                      complete_todo_path(todo), :method => :put, :class => 'icon-check-empty' %>
+        <% end %>
+        </td>
+        <td><%= link_to todo.title, todo_path(todo), :class => "title" %></td>
+        <td class="description"><%= todo.description%></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_todo_path(todo), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      todo_path(todo),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_todo_path,
+            :class => 'btn btn-primary' %>
