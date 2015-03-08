@@ -41,42 +41,45 @@ class TodosController < ApplicationController
   # POST /todos.json
   def create
     @todo = Todo.new(todo_params)
-    if @todo.save
-      redirect_to todos_path, notice: "Todo item created."
+    respond_to do |format|
+      if @todo.save
+        format.html { redirect_to todos_path, notice: 'Todo was successfully created.' }
+        format.json { render json: @todo, status: :created, location: @todo }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      end
     end
-    # respond_to do |format|
-    #   if @todo.save
-    #     format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
-    #     format.json { render json: @todo, status: :created, location: @todo }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @todo.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PUT /todos/1
   # PUT /todos/1.json
   def update
     @todo = Todo.all_todos.find(params[:id])
-    if @todo.update_attributes(todo_params)
-      redirect_to todos_path, notice: "Todo item updated."
+    respond_to do |format|
+      if @todo.update_attributes(todo_params)
+        format.html { redirect_to todos_path, notice: 'Todo was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      end
     end
-    # respond_to do |format|
-    #   if @todo.update_attributes(params[:todo])
-    #     format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
-    #     format.json { head :no_content }
-    #   else
-    #     format.html { render action: "edit" }
-    #     format.json { render json: @todo.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def complete
     @todo = Todo.all_todos.find(params[:id])
     @todo.update_attribute(:status, !@todo.status)
-    redirect_to todos_path, notice: "Todo item marked as complete."
+
+    respond_to do |format|
+      if @todo.update_attributes(params[:todo])
+        format.html { redirect_to todos_path, notice: 'Todo item marked as complete.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /todos/1

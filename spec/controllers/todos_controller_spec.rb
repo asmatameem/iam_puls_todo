@@ -8,7 +8,7 @@ describe TodosController do
 		it "creates todo with given parameters" do 
 			post :create, { todo: { title: "My Title", description: "My todo description" } }
 			expect(response).to redirect_to(todos_path)
-			expect(flash[:notice]).to eq("Todo item created.") 
+			expect(flash[:notice]).to eq("Todo was successfully created.") 
 
 			todo = assigns(:todo) 
 			expect(todo).to be_persisted
@@ -32,6 +32,7 @@ describe TodosController do
 		it "assigns a new todo_list as @todo_list" do
       get :new
       expect(assigns(:todo)).to be_a_new(Todo)
+      expect(response).to have_rendered("todos/new")
     end
 	end
 
@@ -79,7 +80,7 @@ describe TodosController do
 		it "updates attributes of a todo" do 
 			put :update, id: my_todo.id, todo: { title: "New Title" }
 			expect(response).to redirect_to(todos_path)
-			expect(flash[:notice]).to eq("Todo item updated.") 
+			expect(flash[:notice]).to eq("Todo was successfully updated.") 
 
 			todo = assigns(:todo)
 			expect(todo.id).to eq(my_todo.id)
@@ -113,6 +114,8 @@ describe TodosController do
 		it "assigns the requested todo" do
       get :edit, id: my_todo.id
       expect(assigns(:todo)).to eq(my_todo)
+
+      expect(response).to have_rendered("todos/edit")
     end
 	end
 
