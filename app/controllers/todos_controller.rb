@@ -40,9 +40,9 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = Todo.new(params[:todo])
+    @todo = Todo.new(todo_params)
     if @todo.save
-      redirect_to todos_path, notice: "Todo item marked as complete."
+      redirect_to todos_path, notice: "Todo item created."
     end
     # respond_to do |format|
     #   if @todo.save
@@ -59,8 +59,8 @@ class TodosController < ApplicationController
   # PUT /todos/1.json
   def update
     @todo = Todo.all_todos.find(params[:id])
-    if @todo.update_attributes(params[:todo])
-      redirect_to todos_path, notice: "Todo item marked as complete."
+    if @todo.update_attributes(todo_params)
+      redirect_to todos_path, notice: "Todo item updated."
     end
     # respond_to do |format|
     #   if @todo.update_attributes(params[:todo])
@@ -94,6 +94,6 @@ class TodosController < ApplicationController
   private 
 
   def todo_params
-    params.require(:title).permit(:title, :description)
+    params.require(:todo).permit(:title, :description)
   end
 end
