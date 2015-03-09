@@ -18,7 +18,7 @@ Please ensure you run rake db:migrate in both development and test environments,
 	Todo.all_todos
 ````
 
-* Find only the deleted record
+* Find all the deleted records (marked as deleted).
 ````
 	Todo.only_deleted
 ````
