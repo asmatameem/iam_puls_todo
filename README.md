@@ -2,10 +2,10 @@
 
 A simple TODO list application which meets the following requirements: 
 
-1) A user can create a ToDo
-2) A user can list ToDos
-3) A user can mark a ToDo as complete - ( Mark the checkbox )
-4) A user can delete a ToDo
+* A user can create a ToDo
+* A user can list ToDos
+* A user can mark a ToDo as complete - ( Mark the checkbox )
+* A user can delete a ToDo
  ** The delete functionality should not permanently delete the ToDo from the DB.
 
 ### Scopes
