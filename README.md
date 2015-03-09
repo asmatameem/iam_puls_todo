@@ -1,4 +1,4 @@
-### iam_puls_todo
+### iam puls TODO
 
 A simple TODO list application which meets the following requirements: 
 
