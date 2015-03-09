@@ -10,18 +10,14 @@ A simple TODO list application which meets the following requirements:
 
 ### Scopes
 
-* Todo model has 2 scopes
-
 * Find all records that are not deleted
 ````
 	Todo.all_todos
-
 ````
 
 * Find only the deleted record
 ````
 	Todo.only_deleted
-
 ````
 
 * Specs can be found at app/spec directory for both model and controllers. 
