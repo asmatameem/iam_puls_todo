@@ -28,9 +28,4 @@ describe Todo do
   		expect(Todo.only_deleted.count).to eq(3)
   	end
   end
-
-  context "validation" do 
-    
-  end
-
 end
