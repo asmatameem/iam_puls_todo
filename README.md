@@ -8,6 +8,9 @@ A simple TODO list application which meets the following requirements:
 * A user can delete a ToDo
  ** The delete functionality should not permanently delete the ToDo from the DB.
 
+### Setup
+Please ensure you run rake db:migrate in both development and test environments, before running the application.
+
 ### Scopes
 
 * Find all records that are not deleted
